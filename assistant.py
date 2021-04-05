@@ -1,6 +1,7 @@
 import speech_recognition as sr
-#import pyaudio as aud
 import pyttsx3
+# import pyaudio as aud
+
 
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
@@ -15,13 +16,11 @@ try:
         for index, name in enumerate(sr.Microphone.list_microphone_names()):
             print("Microphone with name \"{1}\" found for `Microphone(device_index={0})`".format(index, name))
         print('listening...')
-
         listener.adjust_for_ambient_noise(source)
+        # audio = sr.AudioFile("saludo.wav")
+        #with audio as  source:
         data = listener.record(source, duration=20)
-
-        audio = sr.AudioFile("saludo.wav")
-        with audio as  source:
-            command = listener.recognize_google(source,language='en-US',show_all=True)
+        command = listener.recognize_google(data,language='es-ES',show_all=True)
         print(command)
 
 except Exception as e:
